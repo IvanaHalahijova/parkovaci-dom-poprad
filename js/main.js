@@ -190,6 +190,13 @@
     galleryMoreBtn.addEventListener('click', () => openLightbox(galleryImages, 0));
   }
 
+  // Parking render click → lightbox
+  document.querySelectorAll('.parking-render-wrap[data-lb-src]').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      openLightbox([{ src: wrap.dataset.lbSrc, alt: wrap.dataset.lbAlt || '' }], 0);
+    });
+  });
+
   // Floor plan click → full plan lightbox
   document.querySelectorAll('.apt-fp-wrap[data-fp-src]').forEach(wrap => {
     wrap.addEventListener('click', () => {
