@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Moderné apartmány nad novým parkovacím domom v Poprade na Hviezdoslavovej ulici. Výhľad na Tatry, vlastné parkovanie, nízkoenergetický štandard A+.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Parkovací dom — Nová Hviezdoslavova | Apartmány Poprad">
+<meta property="og:description" content="Moderné apartmány nad novým parkovacím domom v srdci Popradu. Výhľad na Tatry. Vlastné parkovanie. Nízkoenergetický štandard.">
+<meta property="og:image" content="img/tt3.jpg">
+<meta name="theme-color" content="#263140">
+<title>Parkovací dom — Nová Hviezdoslavova | Apartmány Poprad</title>
+<link rel="icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:url" content="">
+<meta property="og:locale" content="sk_SK">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-main">Parkovací dom</span>
+    <span class="nav-logo-sub">nová · hviezdoslavova</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#o-projekte">O projekte</a></li>
+    <li><a href="#galeria">Galéria</a></li>
+    <li><a href="#apartmany">Byty</a></li>
+    <li><a href="#parkovanie">Parkovanie</a></li>
+    <li><a href="#harmonogram">Harmonogram</a></li>
+    <li><a href="#lokalita">Lokalita</a></li>
+    <li><a href="#kontakt" class="nav-cta">Mám záujem</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu" onclick="closeMobileMenu()">
+  <button class="mobile-menu-close" onclick="event.stopPropagation();closeMobileMenu()" aria-label="Zavrieť">
+    <span></span><span></span>
+  </button>
+  <ul onclick="event.stopPropagation()">
+    <li><a href="#o-projekte" onclick="closeMobileMenu()">O projekte</a></li>
+    <li><a href="#galeria" onclick="closeMobileMenu()">Galéria</a></li>
+    <li><a href="#apartmany" onclick="closeMobileMenu()">Byty</a></li>
+    <li><a href="#parkovanie" onclick="closeMobileMenu()">Parkovanie</a></li>
+    <li><a href="#harmonogram" onclick="closeMobileMenu()">Harmonogram</a></li>
+    <li><a href="#lokalita" onclick="closeMobileMenu()">Lokalita</a></li>
+    <li><a href="#kontakt" class="mobile-menu-cta" onclick="closeMobileMenu()">Mám záujem</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-location">Hviezdoslavova · Poprad</p>
+    <h1 class="hero-title">
+      Výnimočné<br>bývanie tam,<br>kde sa stretáva<br>mesto s <em>prírodou</em>
+    </h1>
+    <p class="hero-desc">
+      Moderné apartmány nad novým parkovacím domom v srdci Popradu.
+      Výhľad na Tatry. Kompletná infraštruktúra.
+    </p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">Chcem vedieť viac</a>
+      <a href="#o-projekte" class="btn-ghost">Prezrieť projekt</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="img/tt3.jpg"
+         alt="Parkovací dom Nová Hviezdoslavova — všetky terasy a fasáda"
+         id="hero-img"
+         fetchpriority="high">
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Byty</div>
+    </div>
+    <div class="stat-item reveal reveal-d1">
+      <div class="stat-num">[ X ]</div>
+      <div class="stat-label">Parkovacích miest</div>
+    </div>
+    <div class="stat-item reveal reveal-d2">
+      <div class="stat-num">542 <em>m²</em></div>
+      <div class="stat-label">Plocha bytov</div>
+    </div>
+    <div class="stat-item reveal reveal-d3">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Nadzemných podlaží</div>
+    </div>
+  </div>
+</div>
+
+<!-- O PROJEKTE -->
+<section class="about" id="o-projekte">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <p class="section-eyebrow">O projekte</p>
+      <h2 class="section-title">Moderný <em>štandard</em><br>bývania v Poprade</h2>
+      <p>
+        Projekt na Hviezdoslavovej ulici v Poprade prináša unikátne spojenie
+        moderného parkovacieho domu s komfortnými bytmi. Architektonický
+        koncept ladí s charakterom mesta a prináša nový vizuálny štandard.
+      </p>
+      <p>
+        Výnimočná poloha — v pešej dostupnosti centra, s ľahkým prístupom
+        k diaľnici aj vlakovej stanici — robí z tohto projektu ideálnu investíciu
+        aj miesto pre každodenné bývanie.
+      </p>
+      <div class="about-highlights">
+        <div class="about-hl reveal reveal-d1">
+          <div class="about-hl-val">2025<em>–</em>27</div>
+          <div class="about-hl-label">Realizácia</div>
+        </div>
+        <div class="about-hl reveal reveal-d2">
+          <div class="about-hl-val">A<em>+</em></div>
+          <div class="about-hl-label">En. trieda</div>
+        </div>
+        <div class="about-hl reveal reveal-d3">
+          <div class="about-hl-val">163<em>m²</em></div>
+          <div class="about-hl-label">Plocha bytov od</div>
+        </div>
+        <div class="about-hl reveal reveal-d4">
+          <div class="about-hl-val">[ X ]<em>+</em></div>
+          <div class="about-hl-label">Parkovacích miest</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image reveal reveal-d2">
+      <img src="img/tt9.jpg"
+           alt="Parkovací dom Nová Hviezdoslavova — terasy apartmánov"
+           class="about-real-img"
+           loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- GALÉRIA -->
+<section class="gallery" id="galeria">
+  <div class="gallery-inner">
+    <div class="gallery-header reveal">
+      <p class="section-eyebrow">Vizualizácie</p>
+      <h2 class="section-title">Projekt v <em>obrazoch</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <a href="#" role="button" class="gallery-item gallery-wide reveal" data-gallery-index="0">
+        <img src="img/tt3.jpg" alt="Parkovací dom Nová Hviezdoslavova — terasy a fasáda" loading="lazy">
+      </a>
+      <a href="#" role="button" class="gallery-item reveal reveal-d1" data-gallery-index="1">
+        <img src="img/tt9.jpg" alt="Strešná terasa mezonnet" loading="lazy">
+      </a>
+      <a href="#" role="button" class="gallery-item reveal reveal-d1" data-gallery-index="2">
+        <img src="img/tt11.jpg" alt="Parkovací dom Nová Hviezdoslavova — fasáda a nápis" loading="lazy">
+      </a>
+      <a href="#" role="button" class="gallery-item gallery-wide reveal reveal-d2" data-gallery-index="3">
+        <img src="img/tt4.jpg" alt="Parkovací dom Nová Hviezdoslavova — letecký pohľad pri západe" loading="lazy">
+      </a>
+    </div>
+    <div class="gallery-more reveal">
+      <button class="gallery-more-btn" id="gallery-more-btn">Pozrite si viac  →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="vlastnosti">
+  <div class="features-inner">
+    <div class="features-header">
+      <div class="reveal">
+        <p class="section-eyebrow">Vlastnosti</p>
+        <h2 class="section-title">Prečo práve<br>tento projekt</h2>
+      </div>
+      <p class="reveal reveal-d2">
+        Každý detail projektu bol navrhnutý s ohľadom na komfort obyvateľov,
+        bezpečnosť a dlhodobú hodnotu investície.
+      </p>
+    </div>
+    <div class="features-list">
+
+      <div class="feat-row reveal">
+        <span class="feat-row-num">01</span>
+        <div class="feat-row-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 27 L13 10 L19 20 L23 14 L30 27Z"/></svg>
+        </div>
+        <h3 class="feat-row-title">Výhľad na Tatry</h3>
+        <p class="feat-row-desc">Panoramatický pohľad na Vysoké Tatry priamo z okien a terás bytov.</p>
+      </div>
+
+      <div class="feat-row reveal reveal-d1">
+        <span class="feat-row-num">02</span>
+        <div class="feat-row-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="26" height="13" rx="4"/><path d="M3 18h26M9 12l3-6h8l3 6"/><circle cx="9.5" cy="25" r="2"/><circle cx="22.5" cy="25" r="2"/></svg>
+        </div>
+        <h3 class="feat-row-title">Vlastné parkovanie</h3>
+        <p class="feat-row-desc">Každý byt má vyhradené parkovacie miesto v zabezpečenom parkovacom dome v rámci projektu.</p>
+      </div>
+
+      <div class="feat-row reveal reveal-d1">
+        <span class="feat-row-num">03</span>
+        <div class="feat-row-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4a8 8 0 0 1 8 8c0 5.5-8 17-8 17S8 17.5 8 12a8 8 0 0 1 8-8z"/><circle cx="16" cy="12" r="3"/></svg>
+        </div>
+        <h3 class="feat-row-title">Centrum Popradu</h3>
+        <p class="feat-row-desc">5 minút pešo od centra mesta, obchodov, reštaurácií a zastávok MHD.</p>
+      </div>
+
+      <div class="feat-row reveal reveal-d1">
+        <span class="feat-row-num">04</span>
+        <div class="feat-row-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3L7 18h10l-3 11 14-18H18z"/></svg>
+        </div>
+        <h3 class="feat-row-title">Nízkoenergetický štandard</h3>
+        <p class="feat-row-desc">Budova spĺňa požiadavky energetickej triedy A+ vďaka modernej izolácii a rekuperácii.</p>
+      </div>
+
+      <div class="feat-row reveal reveal-d1">
+        <span class="feat-row-num">05</span>
+        <div class="feat-row-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3L4 8v9c0 7 12 12 12 12s12-5 12-12V8L16 3z"/><path d="M11 16l4 4 6-7"/></svg>
+        </div>
+        <h3 class="feat-row-title">Bezpečnosť</h3>
+        <p class="feat-row-desc">Kamerový systém, kontrolovaný vstup a 24/7 monitorovanie spoločných priestorov.</p>
+      </div>
+
+      <div class="feat-row reveal reveal-d1">
+        <span class="feat-row-num">06</span>
+        <div class="feat-row-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,25 12,15 18,20 29,8"/><polyline points="23,8 29,8 29,14"/></svg>
+        </div>
+        <h3 class="feat-row-title">Investičný potenciál</h3>
+        <p class="feat-row-desc">Poprad ako turistická brána do Tatier zaručuje vysoký dopyt po prenájme po celý rok.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- APARTMÁNY -->
+<section class="apartments" id="apartmany">
+  <div class="apartments-inner">
+    <div class="apartments-header">
+      <div class="reveal">
+        <p class="section-eyebrow">Typy bytov</p>
+        <h2 class="section-title">Výber <em>priestoru</em></h2>
+      </div>
+    </div>
+    <div class="apt-grid">
+
+      <!-- Byt č.1 — 3-izbový byt -->
+      <div class="apt-card reveal">
+        <div class="apt-card-top">
+          <div>
+            <div class="apt-type-badge">3-izbový byt</div>
+            <div class="apt-size-display">
+              <div class="apt-size-num">163<em>m²</em></div>
+              <div class="apt-size-label">Úžitková plocha</div>
+            </div>
+            <div class="apt-size-terasa">+ terasa 60<em>m²</em></div>
+          </div>
+          <div class="apt-floors">5. podlažie</div>
+        </div>
+        <div class="apt-floorplan">
+          <div class="apt-fp-wrap" data-fp-src="img/podorys-5np_new.jpg" data-fp-alt="Pôdorys 5. podlažia">
+            <img src="img/podorys-5np_new.jpg" class="apt-fp-base" alt="" aria-hidden="true" loading="lazy">
+            <img src="img/podorys-5np_new.jpg" class="apt-fp-color apt-fp-byt1" alt="Pôdorys 3-izbového bytu — 5. podlažie" loading="lazy">
+          </div>
+          <div class="apt-floorplan-label">Pôdorys 5. podlažia</div>
+        </div>
+        <div class="apt-card-body">
+          <ul class="apt-rooms">
+            <li>Obývacia izba s kuchyňou</li>
+            <li>2× Izba</li>
+            <li>Vstupná hala</li>
+            <li>Kúpeľňa</li>
+            <li>WC</li>
+            <li>Šatník</li>
+            <li>Komora</li>
+            <li>Chodba</li>
+            <li class="apt-rooms-terasa">Terasa</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Byt č.3 — 4-izbový byt -->
+      <div class="apt-card reveal reveal-d1">
+        <div class="apt-card-top">
+          <div>
+            <div class="apt-type-badge">4-izbový byt</div>
+            <div class="apt-size-display">
+              <div class="apt-size-num">174<em>m²</em></div>
+              <div class="apt-size-label">Úžitková plocha</div>
+            </div>
+            <div class="apt-size-terasa">+ terasa 40<em>m²</em></div>
+          </div>
+          <div class="apt-floors">5. podlažie</div>
+        </div>
+        <div class="apt-floorplan">
+          <div class="apt-fp-wrap" data-fp-src="img/podorys-5np_new.jpg" data-fp-alt="Pôdorys 5. podlažia">
+            <img src="img/podorys-5np_new.jpg" class="apt-fp-base" alt="" aria-hidden="true" loading="lazy">
+            <img src="img/podorys-5np_new.jpg" class="apt-fp-color apt-fp-byt3" alt="Pôdorys 4-izbového bytu — 5. podlažie" loading="lazy">
+          </div>
+          <div class="apt-floorplan-label">Pôdorys 5. podlažia</div>
+        </div>
+        <div class="apt-card-body">
+          <ul class="apt-rooms">
+            <li>Obývacia izba s kuchyňou</li>
+            <li>3× Izba</li>
+            <li>Vstupná hala</li>
+            <li>Kúpeľňa</li>
+            <li>WC</li>
+            <li>Šatník</li>
+            <li>Komora</li>
+            <li>Chodba</li>
+            <li class="apt-rooms-terasa">Terasa</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Apartmán č.2 — Mezonnet -->
+      <div class="apt-card reveal reveal-d2">
+        <div class="apt-card-top">
+          <div>
+            <div class="apt-type-badge">Apartmán — Mezonnet</div>
+            <div class="apt-size-display">
+              <div class="apt-size-num">205<em>m²</em></div>
+              <div class="apt-size-label">Úžitková plocha</div>
+            </div>
+            <div class="apt-size-terasa">+ terasa 90<em>m²</em></div>
+          </div>
+          <div class="apt-floors">5.–6. podlažie</div>
+        </div>
+        <div class="apt-floorplan">
+          <div class="apt-fp-wrap" data-fp-src="img/podorys-5np_new.jpg" data-fp-alt="Pôdorys 5. podlažia — Mezonnet">
+            <img src="img/podorys-5np_new.jpg" class="apt-fp-base" alt="" aria-hidden="true" loading="lazy">
+            <img src="img/podorys-5np_new.jpg" class="apt-fp-color apt-fp-byt2" alt="Pôdorys mezonnet — 5. podlažie" loading="lazy">
+          </div>
+          <div class="apt-floorplan-label">1. úroveň — 5NP (129 m²)</div>
+          <div class="apt-fp-wrap apt-fp-wrap-sm" data-fp-src="img/podorys-6np_new.jpg" data-fp-alt="Pôdorys 6. podlažia — Mezonnet">
+            <img src="img/podorys-6np_new.jpg" class="apt-fp-base" alt="" aria-hidden="true" loading="lazy">
+            <img src="img/podorys-6np_new.jpg" class="apt-fp-color apt-fp-6np-m" alt="Pôdorys mezonnet — 6. podlažie" loading="lazy">
+          </div>
+          <div class="apt-floorplan-label">2. úroveň — 6NP (76 m²)</div>
+        </div>
+        <div class="apt-card-body">
+          <ul class="apt-rooms">
+            <li>Obývacia izba s kuchyňou</li>
+            <li>Pracovňa</li>
+            <li>Vstupná hala</li>
+            <li>Komora / sklad</li>
+            <li>Šatník</li>
+            <li>3× Izba</li>
+            <li>2× Kúpeľňa</li>
+            <li>2× WC</li>
+            <li class="apt-rooms-terasa">Terasa</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARKOVANIE -->
+<section class="parking" id="parkovanie">
+  <div class="parking-inner">
+    <div class="parking-text reveal">
+      <p class="section-eyebrow">Parkovanie</p>
+      <h2 class="section-title">Parkovací dom<br>novej <em>generácie</em></h2>
+      <p>
+        Moderný parkovací dom s najnovšou technológiou, bezpečnostným systémom
+        a pohodlným prístupom priamo z ulice.
+      </p>
+      <p>
+        Parkovacie miesta sú k dispozícii nielen pre obyvateľov bytového domu,
+        ale aj pre verejnosť — čím sa rieši dlhodobo kritický nedostatok parkovania
+        v tejto časti Popradu.
+      </p>
+      <div class="pk-list">
+        <div class="pk-item">EV nabíjacie stanice</div>
+        <div class="pk-item">Kamerový systém 24/7</div>
+        <div class="pk-item">Kontrolovaný vstup (závora / čip)</div>
+        <div class="pk-item">Priestorné parkovacie boxy</div>
+        <div class="pk-item">Bezbariérový prístup</div>
+      </div>
+    </div>
+    <div class="parking-visual reveal reveal-d2">
+      <div class="pk-stat">
+        <div class="pk-stat-num">4</div>
+        <div class="pk-stat-lbl">Podlažia</div>
+      </div>
+      <div class="pk-stat">
+        <div class="pk-stat-num">[ X ]</div>
+        <div class="pk-stat-lbl">Miest celkom</div>
+      </div>
+      <div class="pk-stat">
+        <div class="pk-stat-num">[ X ]</div>
+        <div class="pk-stat-lbl">EV nabíjačiek</div>
+      </div>
+      <div class="pk-stat">
+        <div class="pk-stat-num">24/7</div>
+        <div class="pk-stat-lbl">Monitorovanie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HARMONOGRAM -->
+<section class="harmonogram" id="harmonogram">
+  <div class="harmonogram-inner">
+    <p class="section-eyebrow">Harmonogram</p>
+    <h2 class="section-title">Postup <em>výstavby</em></h2>
+
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-content-left">
+          <div class="tl-date">[ Q1 202X ]</div>
+          <div class="tl-title">Zahájenie projektu</div>
+          <div class="tl-desc">Vydanie stavebného povolenia, výberové konania na dodávateľov.</div>
+        </div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item reveal reveal-d1">
+        <div class="tl-empty"></div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-content-right">
+          <div class="tl-date">[ Q2 202X ]</div>
+          <div class="tl-title">Zemné práce</div>
+          <div class="tl-desc">Príprava staveniska, zakladanie, výkopové práce.</div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal reveal-d2">
+        <div class="tl-content-left">
+          <div class="tl-date">[ Q4 202X ]</div>
+          <div class="tl-title">Hrubá stavba</div>
+          <div class="tl-desc">Betonáž nosnej konštrukcie parkovacieho domu a bytového domu.</div>
+        </div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item reveal reveal-d1">
+        <div class="tl-empty"></div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-content-right">
+          <div class="tl-date">[ Q2 202X ]</div>
+          <div class="tl-title">Dokončovacie práce</div>
+          <div class="tl-desc">Interiérové práce, fasáda, technológie, inštalácie.</div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal reveal-d2">
+        <div class="tl-content-left">
+          <div class="tl-date">[ Q4 202X ]</div>
+          <div class="tl-title">Odovzdanie</div>
+          <div class="tl-desc">Kolaudácia, odovzdanie bytov a parkovacích miest vlastníkom.</div>
+        </div>
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LOKALITA -->
+<section class="location" id="lokalita">
+  <div class="location-inner">
+    <div class="location-text reveal">
+      <p class="section-eyebrow">Lokalita</p>
+      <h2 class="section-title">Srdce <em>Popradu</em>,<br>brána do Tatier</h2>
+      <p>
+        Hviezdoslavova ulica sa nachádza priamo v centre Popradu — v dochádzkovej
+        vzdialenosti od všetkých dôležitých miest. Zároveň ste len pár minút
+        od diaľnice a vlakového spojenia s Tatrami.
+      </p>
+      <div class="poi-list">
+        <div class="poi-item">
+          <span class="poi-name">Centrum mesta</span>
+          <span class="poi-dist">5 min pešo</span>
+        </div>
+        <div class="poi-item">
+          <span class="poi-name">Vlakové nástupište</span>
+          <span class="poi-dist">7 min pešo</span>
+        </div>
+        <div class="poi-item">
+          <span class="poi-name">OC Max</span>
+          <span class="poi-dist">15 min pešo</span>
+        </div>
+        <div class="poi-item">
+          <span class="poi-name">Aquacity Poprad</span>
+          <span class="poi-dist">10 min autom</span>
+        </div>
+        <div class="poi-item">
+          <span class="poi-name">Tatranská Lomnica</span>
+          <span class="poi-dist">25 min autom</span>
+        </div>
+        <div class="poi-item">
+          <span class="poi-name">Diaľnica D1</span>
+          <span class="poi-dist">5 min autom</span>
+        </div>
+      </div>
+    </div>
+    <div class="location-map reveal reveal-d2" id="location-map"></div>
+  </div>
+</section>
+
+<!-- PROJEKTANT -->
+<section class="projektant">
+  <div class="projektant-inner">
+    <div class="projektant-header reveal">
+      <p class="section-eyebrow">Projekt</p>
+      <h2 class="section-title">Architektonický návrh</h2>
+    </div>
+    <div class="appa-card reveal reveal-d1">
+      <a href="https://atelierappa.sk/" target="_blank" rel="noopener" class="appa-logo-link">
+        <img src="img/appa_logo_cierna.png" alt="Ateliér APPA s.r.o." class="appa-logo">
+      </a>
+      <div class="appa-card-divider"></div>
+      <div class="appa-card-body">
+        <p class="appa-desc">Architektonický návrh a projektovú dokumentáciu tejto stavby spracoval prešovský Ateliér APPA s.r.o. — architektúra, interiéry a dizajn s dôrazom na detail.</p>
+        <a href="https://atelierappa.sk/" target="_blank" rel="noopener" class="appa-cta">
+          atelierappa.sk
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 7H12M12 7L7.5 2.5M12 7L7.5 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
+
+    <div class="contact-left reveal">
+      <p class="section-eyebrow">Záujem</p>
+      <h2 class="section-title">Prejavte záujem<br>ako <em>prví</em></h2>
+      <p class="contact-subtitle">
+        Zanechajte nám kontakt a keď bude projekt pripravený na predaj,
+        ozveme sa Vám medzi prvými. Žiadny spam — len relevantné info o projekte.
+      </p>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <span>Telefón</span>
+          <a href="tel:+421900000000">[ +421 9xx xxx xxx ]</a>
+        </div>
+        <div class="contact-info-item">
+          <span>E-mail</span>
+          <a href="mailto:info@projekt.sk">[ info@projekt.sk ]</a>
+        </div>
+        <div class="contact-info-item">
+          <span>Adresa projektu</span>
+          <strong>Hviezdoslavova, Poprad</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal reveal-d2">
+      <form id="interest-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="f-meno">Meno</label>
+            <input type="text" id="f-meno" name="meno" placeholder="Meno" required autocomplete="given-name">
+          </div>
+          <div class="form-field">
+            <label for="f-priezvisko">Priezvisko</label>
+            <input type="text" id="f-priezvisko" name="priezvisko" placeholder="Priezvisko" required autocomplete="family-name">
+          </div>
+          <div class="form-field">
+            <label for="f-email">E-mail</label>
+            <input type="email" id="f-email" name="email" placeholder="Email" required autocomplete="email">
+          </div>
+          <div class="form-field">
+            <label for="f-mobil">Mobil</label>
+            <input type="tel" id="f-mobil" name="telefon" placeholder="Mobil" required autocomplete="tel">
+          </div>
+          <div class="form-field form-field-full">
+            <label for="f-sprava">Správa</label>
+            <textarea id="f-sprava" name="sprava" rows="4" placeholder="Správa (nepovinné)"></textarea>
+          </div>
+        </div>
+        <div class="form-consent">
+          <label class="form-checkbox-label">
+            <input type="checkbox" id="f-gdpr" name="gdpr" required>
+            <span>Súhlasím so <a href="gdpr.html">spracovaním osobných údajov</a> za účelom zasielania informácií o projekte.</span>
+          </label>
+        </div>
+        <button type="submit" class="form-submit">Odoslať záujem</button>
+      </form>
+      <div id="success-msg">
+        Ďakujeme! Vaša registrácia záujmu bola prijatá. Ozveme sa Vám čo najskôr.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Parkovací dom — Nová Hviezdoslavova</span>
+  <p>© 2026 Parkovací dom — Nová Hviezdoslavova · Všetky práva vyhradené</p>
+  <div class="footer-right">
+    <a href="gdpr.html" class="footer-gdpr-link">Ochrana osobných údajov</a>
+    <div class="footer-social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">[ Firemná web ]</a>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top" aria-label="Späť na vrch">
+  ↑
+</button>
+
+<!-- COOKIE BAR -->
+<div id="cookie-bar" role="dialog" aria-label="Nastavenia cookies">
+  <p id="cookie-bar-text">
+    Táto stránka používa cookies na analytiku a marketing.
+    Viac v <a href="gdpr.html">zásadách ochrany súkromia</a>.
+  </p>
+  <div id="cookie-bar-actions">
+    <button class="ck-btn ck-btn-settings" onclick="openCookieModal()">Nastavenia</button>
+    <button class="ck-btn ck-btn-accept"   onclick="acceptAll()">Prijať všetky</button>
+    <button class="ck-btn-reject"           onclick="rejectAll()">Odmietnuť</button>
+  </div>
+</div>
+
+<!-- COOKIE MODAL -->
+<div id="cookie-modal" role="dialog" aria-modal="true" aria-label="Nastavenia súkromia" onclick="if(event.target===this)closeCookieModal()">
+  <div id="cookie-modal-box">
+    <div class="cm-title">Nastavenia súkromia</div>
+    <div class="cm-sub">Vyberte, ktoré cookies povolíte. Nevyhnutné sú vždy aktívne.</div>
+    <div class="cm-rows">
+      <div class="cm-row">
+        <div><div class="cm-row-name">Nevyhnutné cookies</div><div class="cm-row-desc">Základné funkcie webu — vždy zapnuté</div></div>
+        <button class="cm-toggle on locked" disabled></button>
+      </div>
+      <div class="cm-row">
+        <div><div class="cm-row-name">Analytické cookies</div><div class="cm-row-desc">Anonymná štatistika návštevnosti (Google Analytics)</div></div>
+        <button class="cm-toggle on" id="tgl-analytics" onclick="this.classList.toggle('on')" aria-label="Analytické cookies — prepnúť"></button>
+      </div>
+      <div class="cm-row">
+        <div><div class="cm-row-name">Marketingové cookies</div><div class="cm-row-desc">Remarketing — Facebook / Instagram Pixel</div></div>
+        <button class="cm-toggle" id="tgl-marketing" onclick="this.classList.toggle('on')" aria-label="Marketingové cookies — prepnúť"></button>
+      </div>
+    </div>
+    <div class="cm-actions">
+      <button class="cm-act cm-act-all"  onclick="acceptAll()">Prijať všetky</button>
+      <button class="cm-act cm-act-save" onclick="saveCustom()">Uložiť výber</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+<script src="js/map.js" defer></script>
+</body>
+</html>
+
