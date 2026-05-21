@@ -152,7 +152,7 @@
     images.forEach(({ src }) => {
       const p = new Image(); p.onload = () => preloaded.add(src); p.src = src;
     });
-    let showId = 0, firstShow = true;
+    let showId = 0;
 
     function show(i) {
       idx = ((i) + images.length) % images.length;
@@ -160,33 +160,28 @@
       const id = ++showId;
       if (multi) counter.textContent = (idx + 1) + '\u2009/\u2009' + images.length;
 
-      const commit = () => {
+      const display = () => {
         if (id !== showId) return;
-        img.src = src; img.alt = alt; img.style.opacity = '1';
+        // Instant hide (no transition), swap src, then fade in smoothly
+        img.style.transition = 'none';
+        img.style.opacity = '0';
+        img.src = src;
+        img.alt = alt;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (id !== showId) return;
+          img.style.transition = '';
+          img.style.opacity = '1';
+        }));
       };
 
-      // First image: show immediately (lightbox overlay handles the entrance animation)
-      if (firstShow) {
-        firstShow = false;
-        if (preloaded.has(src)) { commit(); }
-        else {
-          const p = new Image();
-          p.onload = () => { preloaded.add(src); commit(); };
-          p.onerror = commit; p.src = src;
-        }
-        return;
-      }
-
-      // Subsequent images: fade out, wait for load, fade in
-      img.style.opacity = '0';
       if (preloaded.has(src)) {
-        // Already cached — swap after fade-out completes (matches CSS transition 0.18s)
-        setTimeout(commit, 190);
+        display();
       } else {
-        // Load in background, display when ready (opacity stays 0 until loaded)
+        // Keep current image visible while next loads in background
         const p = new Image();
-        p.onload = () => { preloaded.add(src); commit(); };
-        p.onerror = commit; p.src = src;
+        p.onload = () => { preloaded.add(src); display(); };
+        p.onerror = display;
+        p.src = src;
       }
     }
     function dismiss() {
