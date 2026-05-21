@@ -1,4 +1,4 @@
-  // Nav scroll
+// Nav scroll
   const nav = document.getElementById('main-nav');
   const scrollTopBtn = document.getElementById('scroll-top');
   const hamburger = document.getElementById('nav-hamburger');
@@ -35,7 +35,8 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        revealObs.unobserve(e.target);
+      } else {
+        e.target.classList.remove('visible');
       }
     });
   }, { threshold: 0.1 });
