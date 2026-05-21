@@ -23,25 +23,25 @@
     className: '', iconSize: [42, 42], iconAnchor: [21, 21]
   }) }).addTo(map);
 
-  // POI markers
+  // POI markers — reálne súradnice z OpenStreetMap/Nominatim
   [
-    ['Lekáreň',     '1 min',  49.05664, 20.29732],
-    ['Kostol',      '2 min',  49.05434, 20.30112],
-    ['Pošta',       '3 min',  49.06014, 20.30132],
-    ['Gymnázium',   '3 min',  49.05394, 20.30312],
-    ['Mestský úrad','3 min',  49.05264, 20.29912],
-    ['Billa',       '5 min',  49.05994, 20.28312],
-    ['Škôlka',      '5 min',  49.05734, 20.28212],
-    ['Lidl',        '5 min',  49.05594, 20.33032],
-    ['Divadlo',     '7 min',  49.04964, 20.29582],
-    ['OC Fórum',    '9 min',  49.04734, 20.30132]
-  ].forEach(([name, time, lat, lng]) => {
-    L.marker([lat, lng], {
+    ['Lekáreň',      '1 min pešo',  49.05834, 20.29399],  // Victoria, Drevárska
+    ['Kostol',       '2 min pešo',  49.05505, 20.30229],  // Evanjelický kostol
+    ['Pošta',        '3 min pešo',  49.05505, 20.29735],  // Poprad 1, Mnoheľova
+    ['Mestský úrad', '3 min pešo',  49.05402, 20.29850],  // Nám. sv. Egídia
+    ['Gymnázium',    '3 min pešo',  49.04722, 20.29827],  // Bilingválne Gymnázium
+    ['Billa',        '5 min pešo',  49.05916, 20.28979],  // Jiřího Wolkera
+    ['Škôlka',       '5 min pešo',  49.05806, 20.28817],  // Materská škola, Podtatranská
+    ['Lidl',         '5 min autom', 49.05900, 20.31048],  // Kukučínova
+    ['Divadlo',      '7 min pešo',  49.05080, 20.29630],
+    ['OC Fórum',     '9 min pešo',  49.05353, 20.29897]   // Nám. sv. Egídia
+  ].forEach(function(p) {
+    L.marker([p[2], p[3]], {
       interactive: false,
       icon: L.divIcon({
-        html: '<div style="display:flex;align-items:center;gap:5px;white-space:nowrap"><div style="width:8px;height:8px;background:#263140;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.22);flex-shrink:0"><\/div><span style="font-family:Inter,sans-serif;font-size:11.5px;font-weight:600;color:#1A2533">' + name + '<\/span><span style="font-family:Inter,sans-serif;font-size:10px;color:#C5876B"> ' + time + ' pešo<\/span><\/div>',
+        html: '<div style="display:flex;align-items:center;gap:5px;white-space:nowrap"><div style="width:8px;height:8px;background:#263140;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.22);flex-shrink:0"><\/div><span style="font-family:Inter,sans-serif;font-size:11.5px;font-weight:600;color:#1A2533">' + p[0] + '<\/span><span style="font-family:Inter,sans-serif;font-size:10px;color:#C5876B"> ' + p[1] + '<\/span><\/div>',
         className: '', iconSize: [240, 18], iconAnchor: [4, 9]
       })
     }).addTo(map);
   });
-})();
+})();
