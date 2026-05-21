@@ -147,14 +147,47 @@
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
+    // Preload all images for smooth transitions
+    const preloaded = new Set();
+    images.forEach(({ src }) => {
+      const p = new Image(); p.onload = () => preloaded.add(src); p.src = src;
+    });
+    let showId = 0, firstShow = true;
+
     function show(i) {
       idx = ((i) + images.length) % images.length;
-      img.style.opacity = '0';
-      img.src = images[idx].src;
-      img.alt = images[idx].alt || '';
-      img.onload = () => { img.style.opacity = '1'; };
-      if (img.complete) img.style.opacity = '1';
+      const { src, alt = '' } = images[idx];
+      const id = ++showId;
       if (multi) counter.textContent = (idx + 1) + '\u2009/\u2009' + images.length;
+
+      const commit = () => {
+        if (id !== showId) return;
+        img.src = src; img.alt = alt; img.style.opacity = '1';
+      };
+
+      // First image: show immediately (lightbox overlay handles the entrance animation)
+      if (firstShow) {
+        firstShow = false;
+        if (preloaded.has(src)) { commit(); }
+        else {
+          const p = new Image();
+          p.onload = () => { preloaded.add(src); commit(); };
+          p.onerror = commit; p.src = src;
+        }
+        return;
+      }
+
+      // Subsequent images: fade out, wait for load, fade in
+      img.style.opacity = '0';
+      if (preloaded.has(src)) {
+        // Already cached — swap after fade-out completes (matches CSS transition 0.18s)
+        setTimeout(commit, 190);
+      } else {
+        // Load in background, display when ready (opacity stays 0 until loaded)
+        const p = new Image();
+        p.onload = () => { preloaded.add(src); commit(); };
+        p.onerror = commit; p.src = src;
+      }
     }
     function dismiss() {
       overlay.remove();
