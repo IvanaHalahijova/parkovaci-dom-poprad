@@ -145,14 +145,22 @@
     overlay.appendChild(imgWrap);
     if (multi) overlay.appendChild(counter);
     document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
 
     function show(i) {
       idx = ((i) + images.length) % images.length;
+      img.style.opacity = '0';
       img.src = images[idx].src;
       img.alt = images[idx].alt || '';
+      img.onload = () => { img.style.opacity = '1'; };
+      if (img.complete) img.style.opacity = '1';
       if (multi) counter.textContent = (idx + 1) + '\u2009/\u2009' + images.length;
     }
-    function dismiss() { overlay.remove(); document.removeEventListener('keydown', onKey); }
+    function dismiss() {
+      overlay.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    }
     function onKey(ev) {
       if (ev.key === 'Escape') dismiss();
       if (multi && ev.key === 'ArrowLeft')  show(idx - 1);
@@ -166,11 +174,22 @@
     document.addEventListener('keydown', onKey);
 
     // Touch swipe (mobile)
-    let tx = 0;
-    overlay.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    let tx = 0, ty = 0, isSwiping = false;
+    overlay.addEventListener('touchstart', e => {
+      tx = e.touches[0].clientX;
+      ty = e.touches[0].clientY;
+      isSwiping = false;
+    }, { passive: true });
+    overlay.addEventListener('touchmove', e => {
+      const dx = Math.abs(e.touches[0].clientX - tx);
+      const dy = Math.abs(e.touches[0].clientY - ty);
+      if (!isSwiping && dx > dy && dx > 8) isSwiping = true;
+      if (isSwiping) e.preventDefault();
+    }, { passive: false });
     overlay.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - tx;
-      if (multi && Math.abs(dx) > 50) show(dx < 0 ? idx + 1 : idx - 1);
+      if (multi && isSwiping && Math.abs(dx) > 40) show(dx < 0 ? idx + 1 : idx - 1);
+      isSwiping = false;
     });
 
     show(startIndex || 0);
