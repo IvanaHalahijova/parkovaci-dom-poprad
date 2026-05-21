@@ -18,7 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -494,7 +493,7 @@
       <div class="poi-list">
         <div class="poi-item">
           <span class="poi-name">Centrum mesta</span>
-          <span class="poi-dist">5 min pešo</span>
+          <span class="poi-dist">10 min pešo</span>
         </div>
         <div class="poi-item">
           <span class="poi-name">Vlakové nástupište</span>
@@ -502,7 +501,7 @@
         </div>
         <div class="poi-item">
           <span class="poi-name">OC Max</span>
-          <span class="poi-dist">15 min pešo</span>
+          <span class="poi-dist">5 min autom</span>
         </div>
         <div class="poi-item">
           <span class="poi-name">Aquacity Poprad</span>
@@ -518,7 +517,11 @@
         </div>
       </div>
     </div>
-    <div class="location-map reveal reveal-d2" id="location-map"></div>
+    <iframe class="location-map reveal reveal-d2"
+      src="https://maps.google.com/maps?q=Nov%C3%A1+Hviezdoslavova,+Poprad&z=17&output=embed"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Poloha projektu Nová Hviezdoslavova, Poprad"
+      style="border:0;width:100%;height:100%;"></iframe>
   </div>
 </section>
 
@@ -673,8 +676,7 @@
 
 <script src="js/main.js" defer></script>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-<script src="js/map.js" defer></script>
+
 </body>
 </html>
 
