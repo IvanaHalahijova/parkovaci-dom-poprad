@@ -122,10 +122,16 @@
 
     const imgWrap = document.createElement('div');
     imgWrap.className = 'lb-img-wrap';
-    const img = document.createElement('img');
-    img.setAttribute('draggable', 'false');
-    img.addEventListener('contextmenu', e => e.preventDefault());
-    imgWrap.appendChild(img);
+    const imgA = document.createElement('img');
+    const imgB = document.createElement('img');
+    [imgA, imgB].forEach(el => {
+      el.setAttribute('draggable', 'false');
+      el.addEventListener('contextmenu', e => e.preventDefault());
+      imgWrap.appendChild(el);
+    });
+    imgA.style.opacity = '0';
+    imgB.style.opacity = '0';
+    let front = imgA, back = imgB;
 
     const prevBtn = document.createElement('button');
     prevBtn.className = 'lb-nav lb-prev';
@@ -147,11 +153,8 @@
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
-    // Preload all images for smooth transitions
-    const preloaded = new Set();
-    images.forEach(({ src }) => {
-      const p = new Image(); p.onload = () => preloaded.add(src); p.src = src;
-    });
+    // Warm HTTP cache for all images
+    images.forEach(({ src }) => { const p = new Image(); p.src = src; });
     let showId = 0;
 
     function show(i) {
@@ -160,29 +163,19 @@
       const id = ++showId;
       if (multi) counter.textContent = (idx + 1) + '\u2009/\u2009' + images.length;
 
-      const display = () => {
-        if (id !== showId) return;
-        // Instant hide (no transition), swap src, then fade in smoothly
-        img.style.transition = 'none';
-        img.style.opacity = '0';
-        img.src = src;
-        img.alt = alt;
-        requestAnimationFrame(() => requestAnimationFrame(() => {
+      // Load into hidden back-buffer, decode, then crossfade
+      back.src = src;
+      back.alt = alt;
+      (back.decode ? back.decode() : Promise.resolve())
+        .catch(() => {})
+        .then(() => {
           if (id !== showId) return;
-          img.style.transition = '';
-          img.style.opacity = '1';
-        }));
-      };
-
-      if (preloaded.has(src)) {
-        display();
-      } else {
-        // Keep current image visible while next loads in background
-        const p = new Image();
-        p.onload = () => { preloaded.add(src); display(); };
-        p.onerror = display;
-        p.src = src;
-      }
+          back.style.transition = 'opacity 0.28s ease';
+          front.style.transition = 'opacity 0.28s ease';
+          back.style.opacity = '1';
+          front.style.opacity = '0';
+          [front, back] = [back, front];
+        });
     }
     function dismiss() {
       overlay.remove();
