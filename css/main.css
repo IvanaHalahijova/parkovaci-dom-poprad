@@ -455,6 +455,14 @@
     font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.12em;
     color: rgba(255,255,255,0.28); margin-top: 0.35rem; font-weight: 600;
   }
+  .parking-render-wrap {
+    max-width: 1200px; margin: 3.5rem auto 0;
+    border-radius: 22px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.10);
+  }
+  .parking-render {
+    width: 100%; height: auto; display: block;
+  }
 
   /* ─── HARMONOGRAM ─── */
   .harmonogram { background: var(--charcoal-2); }
