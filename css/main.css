@@ -621,8 +621,16 @@
     border-top: 1px solid rgba(255,255,255,0.05);
   }
   .footer-logo {
-    font-size: 0.9rem; font-weight: 900; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--white);
+    display: flex; flex-direction: column; gap: 0.18rem;
+    text-decoration: none; line-height: 1;
+  }
+  .footer-logo-main {
+    font-size: 1.15rem; font-weight: 900; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--white); white-space: nowrap;
+  }
+  .footer-logo-sub {
+    font-size: 0.5rem; font-weight: 600; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
   }
   footer p { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
   .footer-social { display: flex; gap: 1.5rem; }
